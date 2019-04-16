@@ -5,3 +5,7 @@ This repository applies the GCNN-DDGF for two traffic-related data prediction st
 * Network-wide Station-level Bike-Sharing Demand Prediction
 
 * Network-wide Traffic Speed Prediction
+
+## Bike-Sharing Demand Prediction 
+
+Bike-sharing demand data are downloaded from 

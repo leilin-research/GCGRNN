@@ -8,7 +8,7 @@ This repository applies the GCNN-DDGF for two traffic-related data prediction st
 
 ### Bike-Sharing Demand Prediction 
 
-Bike-sharing demand data are downloaded from 
+The Bike-sharing demand dataset includes over 28 million bike-sharing transactions between 07/01/2013 and 06/30/2016, which are downloaded from [Citi BSS in New York City] (https://www.citibikenyc.com/system-data).
 
 ### Network-wide Traffic Speed Prediction
 

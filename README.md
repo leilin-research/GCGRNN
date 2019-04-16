@@ -12,3 +12,4 @@ Bike-sharing demand data are downloaded from
 
 ### Network-wide Traffic Speed Prediction
 
+We use the same data from the traffic data files for Los Angeles (METR-LA)

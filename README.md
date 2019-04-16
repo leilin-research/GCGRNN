@@ -12,4 +12,4 @@ Bike-sharing demand data are downloaded from
 
 ### Network-wide Traffic Speed Prediction
 
-We use the same data from the traffic data files for Los Angeles (METR-LA)
+We use the traffic data for Los Angeles (METR-LA) in the paper "Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting". 

@@ -1,2 +1,5 @@
-# NYC_bike_sharing_prediction_GCNN
-Apply Graph Convolution Neural Network and LSTM models for hourly station-level NYC Citi Bike Sharing Demand Prediction.
+# Graph Convolutional Neural Networks with Data-driven Graph Filter (GCNN-DDGF) for Traffic-related Data Prediction, such as:
+
+* Bike-sharing Data
+
+* Traffic Speed Data

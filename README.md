@@ -16,7 +16,7 @@ The Bike-sharing demand dataset includes over 28 million bike-sharing transactio
 
 * Stations with total three-year demand of less than 26304 (less than one bike per hour) are excluded. 
 
-272 stations are considered in this study. The 272 by 26304 matrix is saved as a pickle file. 
+After preprocessing, 272 stations are considered in this study. The 272 by 26304 matrix is saved as a pickle file. 
 
 ### Network-wide Traffic Speed Prediction
 

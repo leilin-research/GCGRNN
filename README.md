@@ -1,6 +1,6 @@
 ## Graph Convolutional Neural Networks with Data-driven Graph Filter (GCNN-DDGF)
 
-This repository applies the GCNN-DDGF for two traffic-related data prediction problems:
+This repository includes the GCNN-DDGF work for two traffic-related data prediction problems:
 
 * Network-wide Station-level Bike-Sharing Demand Prediction
 

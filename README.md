@@ -18,7 +18,7 @@ The Bike-sharing demand dataset includes over 28 million bike-sharing transactio
 
 After preprocessing, 272 stations are considered in this study. The 272 by 26304 matrix is saved as a pickle file. 
 
-### Network-wide Traffic Speed Prediction
+### On-going Experiments for Network-wide Traffic Speed Prediction
 
 We use the traffic data for Los Angeles (METR-LA) in the paper "Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting", which can be found in [their repository](https://github.com/liyaguang/DCRNN). 
 

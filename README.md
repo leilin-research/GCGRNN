@@ -20,7 +20,7 @@ After preprocessing, 272 stations are considered in this study. The 272 by 26304
 
 ### On-going Experiments for Network-wide Traffic Speed Prediction
 
-We use the traffic data for Los Angeles (METR-LA) in the paper "Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting", which can be found in [their repository](https://github.com/liyaguang/DCRNN). 
+We use the traffic data for Los Angeles (METR-LA) in the paper "Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting", which can be found [here](https://github.com/liyaguang/DCRNN). 
 
 ### Citation
 You are more than welcome to cite our paper:

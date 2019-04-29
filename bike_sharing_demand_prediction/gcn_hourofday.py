@@ -18,10 +18,14 @@ from utils import normalize_adj, StandardScaler, masked_mae_tf
 
 
 # Create model
-def gcn(signal_in, weights_hidden, weights_A, biases, hidden_num, node_num, horizon):
+def gcn(signal_in, weights_hidden, weights_other, biases_other, weights_A, biases, hidden_num, hidden_num1, node_num, horizon):
     
-    signal_in = tf.transpose(signal_in, [1, 0, 2]) # node_num, ?batch, feature_in
-    feature_len = signal_in.shape[2] # feature vector length at the node of the input graph
+    print (signal_in.shape)
+    signal_in_main = signal_in[:,:,:,0] #tf.concat([signal_in[:,:,:,0], signal_in[:,:,:,1]], axis = 2) #(?, 207, 24)
+    #print (signal_in_main.shape)
+    
+    signal_in_main = tf.transpose(signal_in_main, [1, 0, 2]) # node_num, ?batch, feature_in
+    feature_len = signal_in_main.shape[2] # feature vector length at the node of the input graph
     
     i = 0
     while i < hidden_num:
@@ -51,21 +55,39 @@ def gcn(signal_in, weights_hidden, weights_A, biases, hidden_num, node_num, hori
         #Atem2 = normalize_adj(tm) #weights['alpha2'] * normalize_adj(tm) #normalize_adj(tm)
         #Atem3 = normalize_adj(cr)
 
-        signal_in = tf.reshape(signal_in, [node_num, -1]) # node_num, batch*feature_in
+        signal_in_main = tf.reshape(signal_in_main, [node_num, -1]) # node_num, batch*feature_in
         
         Adj = 0.5*(weights_A['A'+str(i)] + tf.transpose(weights_A['A'+str(i)])) #+ cr + dm + tm
         #Adj = cr + dm + tm
         Adj = normalize_adj(Adj)
-        Z = tf.matmul(Adj, signal_in) # node_num, batch*feature_in 
+        Z = tf.matmul(Adj, signal_in_main) # node_num, batch*feature_in 
         Z = tf.reshape(Z, [-1, int(feature_len)]) # node_num * batch, feature_in
         signal_output = tf.add(tf.matmul(Z, weights_hidden['h'+str(i)]), biases['b'+str(i)])
         signal_output = tf.nn.relu(signal_output) # node_num * batch, hidden_vec
         
         i += 1
-        signal_in = signal_output # the sinal for next layer 
-        feature_len = signal_in.shape[1] # feature vector length at hidden layers
+        signal_in_main = signal_output # the sinal for next layer 
+        feature_len = signal_in_main.shape[1] # feature vector length at hidden layers
         #print (feature_len)
     
+    signal_in_other = signal_in[:,:,:,1] #tf.concat([signal_in[:,:,:,0], signal_in[:,:,:,1]], axis = 2) #(?, 207, 24)
+    #print (signal_in_main.shape)
+    print (signal_in_other.shape[2])
+    signal_in_other = tf.reshape(signal_in_other, [-1, int(signal_in_other.shape[2])]) # node_num*batch, feature_in
+    i = 0
+    while i < hidden_num1:
+        signal_output_ot = tf.add(tf.matmul(signal_in_other, weights_other['h'+str(i)]), biases_other['b'+str(i)])
+        signal_output_ot = tf.nn.relu(signal_output_ot) # node_num * batch, hidden_vec
+        
+        i += 1
+        signal_in_other = signal_output_ot # the sinal for next layer 
+        #print (feature_len)
+
+    
+    #print (signal_output.shape)
+    #print (signal_in[:, :, :, 1].shape)
+    #signal_in_other = tf.reshape(signal_in_other, [-1, horizon])
+    signal_output = tf.concat([signal_output, signal_output_ot], axis = 1)
     final_output = tf.add(tf.matmul(signal_output, weights_hidden['out']), biases['bout'])  # node_num * batch, horizon
     final_output = tf.reshape(final_output, [node_num, -1, horizon]) # node_num, batch, horizon
     final_output = tf.transpose(final_output, [1, 0, 2]) # batch, node_num, horizon
@@ -116,17 +138,18 @@ def gcnn_ddgf(hidden_num_layer, node_num, feature_in, horizon, learning_rate, de
  
     # Construct model
     hidden_num = len(hidden_num_layer) 
-    pred= gcn(X, weights_hidden, weights_A, biases, hidden_num, node_num, horizon)
+    hidden_num1 = len(hidden_num_layer1) 
+    pred= gcn(X, weights_hidden, weights_A, biases, hidden_num, hidden_num1, node_num, horizon)
     pred = scaler.inverse_transform(pred)
     Y_true_tr = scaler.inverse_transform(Y)
     cost = tf.reduce_mean(tf.pow(pred - Y_true_tr, 2)) 
 
-    pred_val= gcn(X, weights_hidden, weights_A, biases, hidden_num, node_num, horizon)
+    pred_val= gcn(X, weights_hidden, weights_A, biases, hidden_num, hidden_num1, node_num, horizon)
     pred_val = scaler.inverse_transform(pred_val)
     Y_true_val = scaler.inverse_transform(Y)
     cost_val =  tf.reduce_mean(tf.pow(pred_val - Y_true_val, 2)) 
 
-    pred_tes= gcn(X, weights_hidden, weights_A, biases, hidden_num, node_num, horizon)
+    pred_tes= gcn(X, weights_hidden, weights_A, biases, hidden_num, hidden_num1, node_num, horizon)
     pred_tes = scaler.inverse_transform(pred_tes)
     Y_true_tes = scaler.inverse_transform(Y)
     cost_tes = tf.reduce_mean(tf.pow(pred_tes - Y_true_tes, 2)) 
@@ -201,7 +224,7 @@ def gcnn_ddgf(hidden_num_layer, node_num, feature_in, horizon, learning_rate, de
     #test_error = np.sqrt(test_error)
     return best_val, predic_res,Y_true,test_error
 
-def gcnn_ddgf_mae(hidden_num_layer, node_num, feature_in, horizon, learning_rate, decay, batch_size, keep, early_stop_th, training_epochs, X_training, Y_training, X_val, Y_val, X_test, Y_test, scaler):
+def gcnn_ddgf_mae(hidden_num_layer, hidden_num_layer1, node_num, feature_in, horizon, learning_rate, decay, batch_size, keep, early_stop_th, training_epochs, X_training, Y_training, X_val, Y_val, X_test, Y_test, scaler, channel = 2):
    
     n_output_vec = node_num * horizon # length of output vector at the final layer 
     
@@ -219,7 +242,7 @@ def gcnn_ddgf_mae(hidden_num_layer, node_num, feature_in, horizon, learning_rate
     training_epochs = training_epochs
 
     # tf Graph input and output
-    X = tf.placeholder(tf.float32, [None, node_num, feature_in]) # X is the input signal
+    X = tf.placeholder(tf.float32, [None, node_num, feature_in, channel]) # X is the input signal
     Y = tf.placeholder(tf.float32, [None, n_output_vec]) # y is the regression output
     
     keep_prob = tf.placeholder(tf.float32) #dropout (keep probability)
@@ -227,8 +250,10 @@ def gcnn_ddgf_mae(hidden_num_layer, node_num, feature_in, horizon, learning_rate
     # define dictionaries to store layers weight & bias
     i = 0
     weights_hidden = {}
+    weights_other = {}
     weights_A = {}
     biases = {}
+    biases_other = {}
     vec_length = feature_in
     while i < len(hidden_num_layer):
         weights_hidden['h'+str(i)] = tf.Variable(tf.random_normal([vec_length, hidden_num_layer[i]]))
@@ -236,14 +261,20 @@ def gcnn_ddgf_mae(hidden_num_layer, node_num, feature_in, horizon, learning_rate
         weights_A['A'+str(i)] = tf.Variable(tf.random_normal([node_num, node_num]))
         vec_length = hidden_num_layer[i]
         i += 1
-        
-    
-    weights_hidden['out'] = tf.Variable(tf.random_normal([hidden_num_layer[-1], horizon]))
+    i = 0
+    vec_length = feature_in
+    while i < len(hidden_num_layer1):
+        weights_other['h'+str(i)] = tf.Variable(tf.random_normal([vec_length, hidden_num_layer1[i]]))
+        biases_other['b'+str(i)] = tf.Variable(tf.random_normal([1, hidden_num_layer1[i]]))
+        vec_length = hidden_num_layer1[i]
+        i += 1
+    weights_hidden['out'] = tf.Variable(tf.random_normal([hidden_num_layer[-1] + hidden_num_layer1[-1], horizon]))
     biases['bout'] = tf.Variable(tf.random_normal([1, horizon]))
  
     # Construct model
     hidden_num = len(hidden_num_layer) 
-    pred= gcn(X, weights_hidden, weights_A, biases, hidden_num, node_num, horizon)
+    hidden_num1 = len(hidden_num_layer1)
+    pred= gcn(X, weights_hidden, weights_other, biases_other, weights_A, biases, hidden_num, hidden_num1,node_num, horizon)
     pred = scaler.inverse_transform(pred)
     Y_true_tr = scaler.inverse_transform(Y)
     cost = masked_mae_tf(pred, Y_true_tr, 0)
@@ -261,12 +292,12 @@ def gcnn_ddgf_mae(hidden_num_layer, node_num, feature_in, horizon, learning_rate
     #    cost += reg_weight[i]*tf.reduce_sum(tf.abs(weights_A['A'+str(i)]))
     #    i += 1
 
-    pred_val= gcn(X, weights_hidden, weights_A, biases, hidden_num, node_num, horizon)
+    pred_val= gcn(X, weights_hidden, weights_other, biases_other, weights_A, biases, hidden_num, hidden_num1,node_num, horizon)
     pred_val = scaler.inverse_transform(pred_val)
     Y_true_val = scaler.inverse_transform(Y)
     cost_val = masked_mae_tf(pred_val, Y_true_val, 0) 
 
-    pred_tes= gcn(X, weights_hidden, weights_A, biases, hidden_num, node_num, horizon)
+    pred_tes= gcn(X, weights_hidden, weights_other, biases_other, weights_A, biases, hidden_num, hidden_num1,node_num, horizon)
     pred_tes = scaler.inverse_transform(pred_tes)
     Y_true_tes = scaler.inverse_transform(Y)
     cost_tes = masked_mae_tf(pred_tes, Y_true_tes, 0) 

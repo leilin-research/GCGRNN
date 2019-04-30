@@ -85,7 +85,7 @@ decay = 0.9
 batchsize = 100 # batch size 
 
 hidden_num_layer = [10, 10, 20] # determine the number of hidden layers and the vector length at each node of each hidden layer
-reg_weight = [0.0001, 0.0001, 0.0001] # regularization weights for adjacency matrices L1 loss
+#reg_weight = [0.0001, 0.0001, 0.0001] # regularization weights for adjacency matrices L1 loss
 
 keep = 1 # drop out probability
 
@@ -106,8 +106,8 @@ for i in range(10):
 
      print('Total training time: ', end_time-start_time)
 
-     np.savetxt("prediction_"+str(val_error)+"_"+str(test_error)+".csv", predic_res, delimiter = ',')
-     np.savetxt("prediction_Y.csv", test_Y, delimiter = ',')
+     np.savetxt("../data/prediction_"+str(val_error)+"_"+str(test_error)+".csv", predic_res, delimiter = ',')
+     np.savetxt("../data/prediction_Y.csv", test_Y, delimiter = ',')
 
 
 

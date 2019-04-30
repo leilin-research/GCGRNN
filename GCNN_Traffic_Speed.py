@@ -11,11 +11,11 @@ from scipy.stats.stats import pearsonr
 import datetime
 
 from utils import normalize_adj, StandardScaler
-from gcn import gcn, gcnn_ddgf_mae
+from gcn import gcn, gcnn_ddgf
 
 # Import Data
 
-raw_data = pd.read_hdf('../../data/METR-LA/metr-la.h5')
+raw_data = pd.read_hdf('data/metr-la.h5')
 
 
 # Split Data into Training, Validation and Testing
@@ -95,18 +95,18 @@ training_epochs = 1000 # total training epochs
 
 # Training
 
-for i in range(10):
+for i in range(1):
 
      start_time = datetime.datetime.now()
 
-     val_error, predic_res, test_Y, test_error = gcnn_ddgf_mae(hidden_num_layer, node_num, feature_in, horizon, learning_rate, decay, batchsize, keep, early_stop_th, training_epochs, X_training, Y_training, X_val, Y_val, X_test, Y_test, scaler)
+     val_error, predic_res, test_Y, test_error = gcnn_ddgf(hidden_num_layer, node_num, feature_in, horizon, learning_rate, decay, batchsize, keep, early_stop_th, training_epochs, X_training, Y_training, X_val, Y_val, X_test, Y_test, scaler, 'MAE')
 
 
      end_time = datetime.datetime.now()
 
      print('Total training time: ', end_time-start_time)
 
-     np.savetxt("../data/prediction_"+str(val_error)+"_"+str(test_error)+".csv", predic_res, delimiter = ',')
+     np.savetxt("../data/prediction_"+str(batchsize)+"_"+str(hidden_num_layer[0])+"_"+str(hidden_num_layer[1])+"_"+str(0)+"_"+str(val_error)+"_"+str(test_error)+".csv", predic_res, delimiter = ',')
      np.savetxt("../data/prediction_Y.csv", test_Y, delimiter = ',')
 
 

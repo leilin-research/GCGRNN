@@ -102,8 +102,8 @@ def gcnn_ddgf(hidden_num_layer, node_num, feature_in, horizon, learning_rate, de
         print ('Please choose evaluation criterion from RMSE, MAE or MAPE!')
         sys.exit()
                               
-    optimizer = tf.train.RMSPropOptimizer(learning_rate, decay).minimize(cost)
-    #optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cost)
+    #optimizer = tf.train.RMSPropOptimizer(learning_rate, decay).minimize(cost)
+    optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cost)
 
     # Initializing the variables
     init = tf.global_variables_initializer()

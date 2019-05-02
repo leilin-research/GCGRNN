@@ -18,7 +18,11 @@ After preprocessing, 272 stations are considered in this study. The 272 by 26304
 
 ### On-going Experiments for Network-wide Traffic Speed Prediction
 
-We are using the traffic speed data from Los Angeles (["metr-la.h5"](https://github.com/transpaper/GCNN/tree/master/data)) provided in the paper ["Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting"](https://github.com/liyaguang/DCRNN). The current best performance is **3.53** (Mean Absolute Error) for a 12-step prediction, which is comparable to **3.60** in the DCRNN paper. Right now we are improving the stability of our model. 
+We are using the traffic speed data from Los Angeles (["metr-la.h5"](https://github.com/transpaper/GCNN/tree/master/data)) provided in the following paper:
+
+* Yaguang Li, Rose Yu, Cyrus Shahabi, Yan Liu, ["Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting"](https://github.com/liyaguang/DCRNN), ICLR 2018. 
+
+The current best performance is **3.53** (Mean Absolute Error) for a 12-step prediction, which is comparable to **3.60** in the DCRNN paper. Right now we are improving the model stability. 
 
 ### Citation
 You are more than welcome to cite our paper:

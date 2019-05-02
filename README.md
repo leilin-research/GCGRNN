@@ -14,11 +14,11 @@ The Bike-sharing demand dataset includes over 28 million bike-sharing transactio
 
 * Stations with total three-year demand of less than 26304 (less than one bike per hour) are excluded. 
 
-After preprocessing, 272 stations are considered in this study. The 272 by 26304 matrix is saved as ["NYCBikeHourly272.pickle"](https://github.com/transpaper/GCNN/tree/master/data). The Lat/Lon coordinates of 272 stations are saved in ["citi_bike_station_locations.csv"](https://github.com/transpaper/GCNN/tree/master/data).
+After preprocessing, 272 stations are considered in this study. The 272 by 26304 matrix is saved as [NYCBikeHourly272.pickle](https://github.com/transpaper/GCNN/tree/master/data). The Lat/Lon coordinates of 272 stations are saved in [citi_bike_station_locations.csv](https://github.com/transpaper/GCNN/tree/master/data).
 
 ### On-going Experiments for Network-wide Traffic Speed Prediction
 
-We are using the traffic speed data from Los Angeles (["metr-la.h5"](https://github.com/transpaper/GCNN/tree/master/data)) provided in the following paper:
+We are using the traffic speed data from Los Angeles ([metr-la.h5](https://github.com/transpaper/GCNN/tree/master/data)) provided in the following paper:
 
 * Yaguang Li, Rose Yu, Cyrus Shahabi, Yan Liu, ["Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting"](https://github.com/liyaguang/DCRNN), ICLR 2018. 
 

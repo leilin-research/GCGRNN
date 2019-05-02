@@ -50,7 +50,7 @@ Y_whole = np.stack(Y_whole, axis=0)
 
 X_whole = np.reshape(X_whole, [X_whole.shape[0], node_num, feature_in])
 num_samples = X_whole.shape[0]
-num_train = 20000 # Note here actually we use the first 20000 to train the model. The paper mentioned "22304" need to be corrected.
+num_train = 20000 
 num_val = 2000
 num_test = 2000
 

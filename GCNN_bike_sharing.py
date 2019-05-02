@@ -88,7 +88,7 @@ decay = 0.9
 batchsize = 100 # batch size 
 
 hidden_num_layer = [10, 10, 5] # determine the number of hidden layers and the vector length at each node of each hidden layer
-reg_weight = [0.0001, 0.0001, 0.0001] # regularization weights for adjacency matrices L1 loss
+reg_weight = [0, 0, 0] # regularization weights for adjacency matrices L1 loss
 
 keep = 1 # drop out probability
 
@@ -100,7 +100,7 @@ training_epochs = 200 # total training epochs
 
 start_time = datetime.datetime.now()
 
-val_error, predic_res, test_Y, test_error = gcnn_ddgf(hidden_num_layer, reg_weight, node_num, feature_in, horizon, learning_rate, decay, batchsize, keep, early_stop_th, training_epochs, X_training, Y_training, X_val, Y_val, X_test, Y_test, scaler, 'RMSE')
+val_error, predic_res, test_Y, test_error, bestWeightA = gcnn_ddgf(hidden_num_layer, reg_weight, node_num, feature_in, horizon, learning_rate, decay, batchsize, keep, early_stop_th, training_epochs, X_training, Y_training, X_val, Y_val, X_test, Y_test, scaler, 'RMSE')
 
 
 end_time = datetime.datetime.now()

@@ -109,8 +109,8 @@ def gcnn_ddgf(hidden_num_layer, reg_weight, node_num, feature_in, horizon, learn
         cost += reg_weight[i]*tf.reduce_sum(tf.abs(weights_A['A'+str(i)]))
         i += 1
           
-    #optimizer = tf.train.RMSPropOptimizer(learning_rate, decay).minimize(cost)
-    optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cost)
+    optimizer = tf.train.RMSPropOptimizer(learning_rate, decay).minimize(cost)
+    #optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cost)
 
     # Initializing the variables
     init = tf.global_variables_initializer()

@@ -22,14 +22,13 @@ def gcn(signal_in, weights_hidden, weights_A, biases, hidden_num, node_num, hori
     
     signal_in = tf.transpose(signal_in, [1, 0, 2]) # node_num, ?batch, feature_in
     feature_len = signal_in.shape[2] # feature vector length at the node of the input graph
-    
+
     i = 0
     while i < hidden_num:
 
         signal_in = tf.reshape(signal_in, [node_num, -1]) # node_num, batch*feature_in
         
-        Adj = 0.5*(weights_A['A'+str(i)] + tf.transpose(weights_A['A'+str(i)])) #+ cr + dm + tm
-        #Adj = cr + dm + tm
+        Adj = 0.5*(weights_A['A'+str(i)] + tf.transpose(weights_A['A'+str(i)])) 
         Adj = normalize_adj(Adj)
         Z = tf.matmul(Adj, signal_in) # node_num, batch*feature_in 
         Z = tf.reshape(Z, [-1, int(feature_len)]) # node_num * batch, feature_in
@@ -49,7 +48,7 @@ def gcn(signal_in, weights_hidden, weights_A, biases, hidden_num, node_num, hori
     return final_output
 
 
-def gcnn_ddgf(hidden_num_layer, node_num, feature_in, horizon, learning_rate, decay, batch_size, keep, early_stop_th, training_epochs, X_training, Y_training, X_val, Y_val, X_test, Y_test, scaler, criterion):
+def gcnn_ddgf(hidden_num_layer, reg_weight, node_num, feature_in, horizon, learning_rate, decay, batch_size, keep, early_stop_th, training_epochs, X_training, Y_training, X_val, Y_val, X_test, Y_test, scaler, criterion):
    
     n_output_vec = node_num * horizon # length of output vector at the final layer 
     
@@ -59,6 +58,7 @@ def gcnn_ddgf(hidden_num_layer, node_num, feature_in, horizon, learning_rate, de
     traing_error = 0
     test_error = 0
     predic_res = []
+    bestWeightA = {}
 
     tf.reset_default_graph()
 
@@ -94,6 +94,7 @@ def gcnn_ddgf(hidden_num_layer, node_num, feature_in, horizon, learning_rate, de
     pred= gcn(X, weights_hidden, weights_A, biases, hidden_num, node_num, horizon)
     pred = scaler.inverse_transform(pred)
     Y_original = scaler.inverse_transform(Y)
+
     if criterion == 'RMSE':
         cost = tf.sqrt(tf.reduce_mean(tf.pow(pred - Y_original, 2))) 
     elif criterion == 'MAE':
@@ -101,7 +102,13 @@ def gcnn_ddgf(hidden_num_layer, node_num, feature_in, horizon, learning_rate, de
     else:
         print ('Please choose evaluation criterion from RMSE, MAE or MAPE!')
         sys.exit()
-                              
+                    
+    # regularization
+    i = 0
+    while i < len(reg_weight):
+        cost += reg_weight[i]*tf.reduce_sum(tf.abs(weights_A['A'+str(i)]))
+        i += 1
+          
     #optimizer = tf.train.RMSPropOptimizer(learning_rate, decay).minimize(cost)
     optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cost)
 
@@ -142,7 +149,7 @@ def gcnn_ddgf(hidden_num_layer, node_num, feature_in, horizon, learning_rate, de
             c_val = c_val[0]
             print("Validation " + criterion+":", c_val)
             # testing
-            c_tes, preds, Y_true = sess.run([cost, pred, Y_original], feed_dict={X: X_test,Y: Y_test, keep_prob: 1})
+            c_tes, preds, Y_true, weights_A_final = sess.run([cost, pred, Y_original, weights_A], feed_dict={X: X_test,Y: Y_test, keep_prob: 1})
             c_tes = c_tes
 
             if c_val < best_val:
@@ -152,6 +159,7 @@ def gcnn_ddgf(hidden_num_layer, node_num, feature_in, horizon, learning_rate, de
                 test_error = c_tes
                 traing_error = avg_cost
                 predic_res = preds
+                bestWeightA = weights_A_final
                 early_stop_k = 0 # reset to 0
 
             # update early stopping patience
@@ -170,6 +178,6 @@ def gcnn_ddgf(hidden_num_layer, node_num, feature_in, horizon, learning_rate, de
     
     #test_Y = Y_test
     #test_error = np.sqrt(test_error)
-    return best_val, predic_res,Y_true,test_error
+    return best_val, predic_res,Y_true,test_error, bestWeightA
 
 

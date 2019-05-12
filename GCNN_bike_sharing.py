@@ -92,8 +92,8 @@ reg_weight = [0, 0, 0] # regularization weights for adjacency matrices L1 loss
 
 keep = 1 # drop out probability
 
-early_stop_th = 20 # early stopping threshold, if validation RMSE not dropping in continuous 20 steps, break
-training_epochs = 200 # total training epochs
+early_stop_th = 200 # early stopping threshold, if validation RMSE not dropping in continuous 20 steps, break
+training_epochs = 500 # total training epochs
 
 
 # Training

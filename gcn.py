@@ -79,15 +79,15 @@ def gcnn_ddgf(hidden_num_layer, reg_weight, node_num, feature_in, horizon, learn
     biases = {}
     vec_length = feature_in
     while i < len(hidden_num_layer):
-        weights_hidden['h'+str(i)] = tf.Variable(tf.random_normal([vec_length, hidden_num_layer[i]]))
-        biases['b'+str(i)] = tf.Variable(tf.random_normal([1, hidden_num_layer[i]]))
-        weights_A['A'+str(i)] = tf.Variable(tf.random_normal([node_num, node_num]))
+        weights_hidden['h'+str(i)] = tf.Variable(tf.random_normal([vec_length, hidden_num_layer[i]], stddev=0.5))
+        biases['b'+str(i)] = tf.Variable(tf.random_normal([1, hidden_num_layer[i]], stddev=0.5))
+        weights_A['A'+str(i)] = tf.Variable(tf.random_normal([node_num, node_num], stddev=0.5))
         vec_length = hidden_num_layer[i]
         i += 1
         
     
-    weights_hidden['out'] = tf.Variable(tf.random_normal([hidden_num_layer[-1], horizon]))
-    biases['bout'] = tf.Variable(tf.random_normal([1, horizon]))
+    weights_hidden['out'] = tf.Variable(tf.random_normal([hidden_num_layer[-1], horizon], stddev=0.5))
+    biases['bout'] = tf.Variable(tf.random_normal([1, horizon], stddev=0.5))
  
     # Construct model
     hidden_num = len(hidden_num_layer) 
@@ -109,8 +109,8 @@ def gcnn_ddgf(hidden_num_layer, reg_weight, node_num, feature_in, horizon, learn
         cost += reg_weight[i]*tf.reduce_sum(tf.abs(weights_A['A'+str(i)]))
         i += 1
           
-    optimizer = tf.train.RMSPropOptimizer(learning_rate, decay).minimize(cost)
-    #optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cost)
+    #optimizer = tf.train.RMSPropOptimizer(learning_rate, decay).minimize(cost)
+    optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cost)
 
     # Initializing the variables
     init = tf.global_variables_initializer()

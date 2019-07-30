@@ -83,11 +83,11 @@ Y_test = scaler.transform(Y_test)
 
 # Hyperparameters
 
-learning_rate = 0.005 # learning rate
+learning_rate = 0.01 # learning rate
 decay = 0.9
 batchsize = 100 # batch size 
 
-hidden_num_layer = [10, 10, 5] # determine the number of hidden layers and the vector length at each node of each hidden layer
+hidden_num_layer = [10, 10, 20] # determine the number of hidden layers and the vector length at each node of each hidden layer
 reg_weight = [0, 0, 0] # regularization weights for adjacency matrices L1 loss
 
 keep = 1 # drop out probability

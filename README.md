@@ -26,9 +26,9 @@ The current best performance is **3.19** (Mean Absolute Error) for a 12-step pre
 
 
 <p float="left">
-  <img src="results/mae_traffic_speed.png" width="100" />
-  <img src="results/mape_traffic_speed.png" width="100" /> 
-  <img src="results/rmse_traffic_speed.png" width="100" />
+  <img src="results/mae_traffic_speed.png" width="400" height="400" />
+  <img src="results/mape_traffic_speed.png" width="400" height="400" /> 
+  <img src="results/rmse_traffic_speed.png" width="400" height="400" />
 </p>
 
 ### Citation

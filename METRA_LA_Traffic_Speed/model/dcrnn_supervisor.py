@@ -78,10 +78,8 @@ class DCRNNSupervisor(object):
         null_val = 0.
         self._loss_fn = masked_mae_loss(scaler, null_val)
         self._train_loss = self._loss_fn(preds=preds, labels=labels)
-        #reg_variables = tf.get_collection(tf.GraphKeys.REGULARIZATION_LOSSES) #-Lei
-        #reg_term = tf.contrib.layers.apply_regularization(regularizer, reg_variables) #-Lei
         #reg_term = tf.losses.get_regularization_loss()
-        #self._train_loss += reg_term#reg_term #-Lei
+        #self._train_loss += reg_term#reg_term 
         #print ('reg loss is:', reg_term)
         tvars = tf.trainable_variables()
         grads = tf.gradients(self._train_loss, tvars)
@@ -244,11 +242,11 @@ class DCRNNSupervisor(object):
             self._logger.info(message)
             outputs = self.evaluate(sess)
             #print (outputs['groundtruth'].shape)
-            y = outputs['groundtruth'][:, :, :, 0] # -Lei
-            best_pred = outputs['predictions'][:y.shape[0], :, :, 0] # -Lei
+            y = outputs['groundtruth'][:, :, :, 0] 
+            best_pred = outputs['predictions'][:y.shape[0], :, :, 0] 
             y = y.reshape(y.shape[0], -1, order = 'F') # record the corresponding steps for each node first, then node by node
             best_pred = best_pred.reshape(y.shape[0], -1, order = 'F')
-            scaler = self._data['scaler'] #-Lei
+            scaler = self._data['scaler'] 
 
             if val_loss <= min_val_loss:
                 wait = 0
@@ -262,7 +260,7 @@ class DCRNNSupervisor(object):
                 mae = metrics.masked_mae_np(best_pred, y, null_val=0)
 
                 self._logger.info(
-                    'Overall Test MAE %.4f - Lei' % (mae))
+                    'Overall Test MAE %.4f' % (mae))
                 print (best_pred.shape)
                 #np.savetxt("../data/GCNN_results/gcn_dcrnn_speed.csv", best_pred, delimiter = ',')
                 #np.savetxt("../data/GCNN_results/y_truth_gcn_dcrnn_speed.csv", y, delimiter = ',')

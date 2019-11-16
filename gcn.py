@@ -150,7 +150,7 @@ def gcnn_ddgf(hidden_num_layer, reg_weight, node_num, feature_in, horizon, learn
             print("Validation " + criterion+":", c_val)
             # testing
             c_tes, preds, Y_true, weights_A_final = sess.run([cost, pred, Y_original, weights_A], feed_dict={X: X_test,Y: Y_test, keep_prob: 1})
-            c_tes = c_tes
+            
 
             if c_val < best_val:
                 best_val = c_val

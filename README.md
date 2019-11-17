@@ -43,6 +43,12 @@ We download a real-world network-wide hourly traffic volume dataset from [the Pe
   <img src="results/rmse_traffic_volume.png" width="250" height="250" />
 </p>
 
+### Training Time Comparison
+
+We find that GCNN-DDGF can be trained much faster than DCRNN. 
+
+<img src="results/training_time_comparison.png" width="500" height="500" />
+
 ### Citation
 You are more than welcome to cite our paper:
 ```

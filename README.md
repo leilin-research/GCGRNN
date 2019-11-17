@@ -14,11 +14,11 @@ The Bike-sharing demand dataset includes over 28 million bike-sharing transactio
 
 * Stations with total three-year demand of less than 26304 (less than one bike per hour) are excluded. 
 
-After preprocessing, 272 stations are considered in this study. The 272 by 26304 matrix is saved as [NYCBikeHourly272.pickle](https://github.com/transpaper/GCNN/tree/master/data). The Lat/Lon coordinates of 272 stations are saved in [citi_bike_station_locations.csv](https://github.com/transpaper/GCNN/tree/master/data).
+After preprocessing, 272 stations are considered in this study. The 272 by 26304 matrix is saved as [NYCBikeHourly272.pickle](https://github.com/transpaper/GCNN/tree/master/data/NYC_Citi_bike). The Lat/Lon coordinates of 272 stations are saved in [citi_bike_station_locations.csv](https://github.com/transpaper/GCNN/tree/master/data/NYC_Citi_bike).
 
 ### Network-wide Traffic Speed Prediction
 
-We are using the traffic speed data from Los Angeles ([metr-la.h5](https://github.com/transpaper/GCNN/tree/master/data)) provided in the following paper:
+We are using the traffic speed data from Los Angeles ([metr-la.h5](https://github.com/transpaper/GCNN/tree/master/data/METR-LA_traffic_speed)) provided in the following paper:
 
 * Yaguang Li, Rose Yu, Cyrus Shahabi, Yan Liu, ["Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting"](https://github.com/liyaguang/DCRNN), ICLR 2018. 
 
@@ -33,7 +33,7 @@ The current best performance is **3.19** (Mean Absolute Error) for a 12-step pre
 
 ### Network-wide Traffic Volume Prediction
 
-We download a real-world network-wide hourly traffic volume dataset from the PeMS system (01/01/2018-06/30/2019). It includes 141 sensors, each sensor has 13,104 hourly traffic volumes. The whole dataset is split into training, validation, and testing datset according to a rate of 0.7, 0.1, and 0.2. The comparison of GCNN-DDGF and DCRNN for a 12-step prediction is also shown as below:
+We download a real-world network-wide hourly traffic volume dataset from the PeMS system (01/01/2018-06/30/2019). The dataset [sensor_volume_141.csv](https://github.com/transpaper/GCNN/tree/master/data/METR-LA_traffic_volume) includes 141 sensors, each sensor has 13,104 hourly traffic volumes. The whole dataset is split into training, validation, and testing datset according to a rate of 0.7, 0.1, and 0.2. The comparison of GCNN-DDGF and DCRNN for a 12-step prediction is also shown as below:
 
 <p float="left">
   <img src="results/mae_traffic_volume.png" width="250" height="250" />

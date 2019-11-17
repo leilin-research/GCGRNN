@@ -16,7 +16,7 @@ The Bike-sharing demand dataset includes over 28 million bike-sharing transactio
 
 After preprocessing, 272 stations are considered in this study. The 272 by 26304 matrix is saved as [NYCBikeHourly272.pickle](https://github.com/transpaper/GCNN/tree/master/data). The Lat/Lon coordinates of 272 stations are saved in [citi_bike_station_locations.csv](https://github.com/transpaper/GCNN/tree/master/data).
 
-### On-going Experiments for Network-wide Traffic Speed Prediction
+### Network-wide Traffic Speed Prediction
 
 We are using the traffic speed data from Los Angeles ([metr-la.h5](https://github.com/transpaper/GCNN/tree/master/data)) provided in the following paper:
 
@@ -29,6 +29,16 @@ The current best performance is **3.19** (Mean Absolute Error) for a 12-step pre
   <img src="results/mae_traffic_speed.png" width="250" height="250" />
   <img src="results/mape_traffic_speed.png" width="250" height="250" /> 
   <img src="results/rmse_traffic_speed.png" width="250" height="250" />
+</p>
+
+### Network-wide Traffic Volume Prediction
+
+We download a real-world network-wide hourly traffic volume dataset from the PeMS system (01/01/2018-06/30/2019). It includes 141 sensors, each sensor has 13,104 hourly traffic volumes. The whole dataset is split into training, validation, and testing datset according to a rate of 0.7, 0.1, and 0.2. The comparison of GCNN-DDGF and DCRNN for a 12-step prediction is also shown as below:
+
+<p float="left">
+  <img src="results/mae_traffic_volume.png" width="250" height="250" />
+  <img src="results/mape_traffic_volume.png" width="250" height="250" /> 
+  <img src="results/rmse_traffic_volume.png" width="250" height="250" />
 </p>
 
 ### Citation

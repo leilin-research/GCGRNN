@@ -6,7 +6,7 @@ data:
   dataset_dir: ../data/METR-LA_traffic_speed
   test_batch_size: 64
   val_batch_size: 64
-  graph_pkl_filename: data/sensor_graph/adj_mx.pkl
+  graph_pkl_filename: data/sensor_graph/adj_mx.pkl # not using
 
 model:
   cl_decay_steps: 2000

@@ -22,7 +22,7 @@ We are using the traffic speed data from Los Angeles ([metr-la.h5](https://githu
 
 * Yaguang Li, Rose Yu, Cyrus Shahabi, Yan Liu, ["Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting"](https://github.com/liyaguang/DCRNN), ICLR 2018. 
 
-The current best performance is **3.19** (Mean Absolute Error) for a 12-step prediction. 
+The current best performance is **3.19** (Mean Absolute Error) for a 12-step prediction. The comparison of our GCNN-DDGF and DCRNN is shown as follows:
 
 
 <p float="left">

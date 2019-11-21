@@ -262,8 +262,8 @@ class DCRNNSupervisor(object):
                 self._logger.info(
                     'Overall Test MAE %.4f' % (mae))
                 print (best_pred.shape)
-                #np.savetxt("gcn_dcrnn_speed.csv", best_pred, delimiter = ',')
-                #np.savetxt("y_truth_gcn_dcrnn_speed.csv", y, delimiter = ',')
+                np.savetxt("GCNN_volume_141.csv", best_pred, delimiter = ',')
+                np.savetxt("y_truth_gcn_GCNN_volume_141.csv", y, delimiter = ',')
             else:
                 wait += 1
                 if wait > patience:

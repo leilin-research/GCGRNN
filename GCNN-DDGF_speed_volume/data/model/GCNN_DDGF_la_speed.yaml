@@ -3,22 +3,22 @@ base_dir: data/model
 log_level: INFO
 data:
   batch_size: 32
-  dataset_dir: ../data/METR-LA_traffic_volume
+  dataset_dir: ../data/METR-LA_traffic_speed
   test_batch_size: 64
   val_batch_size: 64
   graph_pkl_filename: data/sensor_graph/adj_mx.pkl # not using
 
 model:
   cl_decay_steps: 2000
-  filter_type: dual_random_walk # not using
+  filter_type: dual_random_walk
   horizon: 12
   input_dim: 1
-  l1_decay: 0 # not using
-  max_diffusion_step: 2 # not using
-  num_nodes: 141
-  num_rnn_layers: 1 # 2 # number of hidden layers in RNN
+  l1_decay: 0
+  max_diffusion_step: 2
+  num_nodes: 207
+  num_rnn_layers: 1 # 2
   output_dim: 1
-  rnn_units: 128 # hidden unit dimension
+  rnn_units: 32
   seq_len: 12
   use_curriculum_learning: true
 
@@ -26,7 +26,7 @@ train:
   base_lr: 0.01
   dropout: 0
   epoch: 0
-  epochs: 300
+  epochs: 35
   epsilon: 1.0e-3
   global_step: 0
   lr_decay_ratio: 0.1

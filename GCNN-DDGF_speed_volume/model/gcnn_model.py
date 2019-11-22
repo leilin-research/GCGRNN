@@ -20,11 +20,8 @@ class GCNNModel(object):
         self._mae = None
         self._train_op = None
 
-        max_diffusion_step = int(model_kwargs.get('max_diffusion_step', 2))
         cl_decay_steps = int(model_kwargs.get('cl_decay_steps', 1000))
-        filter_type = model_kwargs.get('filter_type', 'laplacian')
         horizon = int(model_kwargs.get('horizon', 1))
-        max_grad_norm = float(model_kwargs.get('max_grad_norm', 5.0))
         num_nodes = int(model_kwargs.get('num_nodes', 1))
         num_rnn_layers = int(model_kwargs.get('num_rnn_layers', 1))
         rnn_units = int(model_kwargs.get('rnn_units'))
@@ -41,10 +38,8 @@ class GCNNModel(object):
         # GO_SYMBOL = tf.zeros(shape=(batch_size, num_nodes * input_dim))
         GO_SYMBOL = tf.zeros(shape=(batch_size, num_nodes * output_dim))
 
-        cell = GCNNGRUCell(rnn_units, max_diffusion_step=max_diffusion_step, num_nodes=num_nodes,
-                         filter_type=filter_type)
-        cell_with_projection = GCNNGRUCell(rnn_units, max_diffusion_step=max_diffusion_step, num_nodes=num_nodes,
-                                         num_proj=output_dim, filter_type=filter_type)
+        cell = GCNNGRUCell(rnn_units, num_nodes=num_nodes)
+        cell_with_projection = GCNNGRUCell(rnn_units, num_nodes=num_nodes,num_proj=output_dim)
         encoding_cells = [cell] * num_rnn_layers
         decoding_cells = [cell] * (num_rnn_layers - 1) + [cell_with_projection]
         encoding_cells = tf.contrib.rnn.MultiRNNCell(encoding_cells, state_is_tuple=True)

@@ -3,10 +3,10 @@ base_dir: data/model
 log_level: INFO
 data:
   batch_size: 32
-  dataset_dir: data/VOLUME-LA-LEI_141
+  dataset_dir: ../data/PEMS_traffic_volume
   test_batch_size: 64
   val_batch_size: 64
-  graph_pkl_filename: data/sensor_graph/adj_mat_volume_Lei_141.pkl
+  graph_pkl_filename: ../data/PEMS_traffic_volume/adj_mat_volume_141.pkl
 
 model:
   cl_decay_steps: 1000

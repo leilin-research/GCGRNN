@@ -104,20 +104,13 @@ class GCNNSupervisor(object):
         if log_dir is None:
             batch_size = kwargs['data'].get('batch_size')
             learning_rate = kwargs['train'].get('base_lr')
-            max_diffusion_step = kwargs['model'].get('max_diffusion_step')
             num_rnn_layers = kwargs['model'].get('num_rnn_layers')
             rnn_units = kwargs['model'].get('rnn_units')
             structure = '-'.join(
                 ['%d' % rnn_units for _ in range(num_rnn_layers)])
             horizon = kwargs['model'].get('horizon')
-            filter_type = kwargs['model'].get('filter_type')
-            filter_type_abbr = 'L'
-            if filter_type == 'random_walk':
-                filter_type_abbr = 'R'
-            elif filter_type == 'dual_random_walk':
-                filter_type_abbr = 'DR'
-            run_id = 'GCNN_DDGF_%s_%d_h_%d_%s_lr_%g_bs_%d_%s/' % (
-                filter_type_abbr, max_diffusion_step, horizon,
+            run_id = 'GCNN_DDGF_h_%d_%s_lr_%g_bs_%d_%s/' % (
+                horizon,
                 structure, learning_rate, batch_size,
                 time.strftime('%m%d%H%M%S'))
             base_dir = kwargs.get('base_dir')
@@ -203,6 +196,9 @@ class GCNNSupervisor(object):
         max_to_keep = train_kwargs.get('max_to_keep', 100)
         saver = tf.train.Saver(tf.global_variables(), max_to_keep=max_to_keep)
         model_filename = train_kwargs.get('model_filename')
+
+        output_file = train_kwargs.get('preds_file')
+        gt_file = train_kwargs.get('groundtruth_file')
         if model_filename is not None:
             saver.restore(sess, model_filename)
             self._epoch = epoch + 1
@@ -262,8 +258,8 @@ class GCNNSupervisor(object):
                 self._logger.info(
                     'Overall Test MAE %.4f' % (mae))
                 print (best_pred.shape)
-                np.savetxt("GCNN_volume_141.csv", best_pred, delimiter = ',')
-                np.savetxt("y_truth_gcn_GCNN_volume_141.csv", y, delimiter = ',')
+                np.savetxt(output_file, best_pred, delimiter = ',')
+                np.savetxt(gt_file, y, delimiter = ',')
             else:
                 wait += 1
                 if wait > patience:

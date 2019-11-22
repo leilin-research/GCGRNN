@@ -3,18 +3,15 @@ base_dir: data/model
 log_level: INFO
 data:
   batch_size: 32
-  dataset_dir: ../data/METR-LA_traffic_volume
+  dataset_dir: ../data/PEMS_traffic_volume
   test_batch_size: 64
   val_batch_size: 64
-  graph_pkl_filename: data/sensor_graph/adj_mx.pkl # not using
 
 model:
   cl_decay_steps: 2000
-  filter_type: dual_random_walk # not using
   horizon: 12
   input_dim: 1
   l1_decay: 0 # not using
-  max_diffusion_step: 2 # not using
   num_nodes: 141
   num_rnn_layers: 1 # 2 # number of hidden layers in RNN
   output_dim: 1
@@ -37,3 +34,5 @@ train:
   patience: 50
   steps: [20] # , 30, 40, 50
   test_every_n_epochs: 1
+  preds_file: "GCNN_volume_141.csv"
+  groundtruth_file: "y_truth_GCNN_volume_141.csv" 

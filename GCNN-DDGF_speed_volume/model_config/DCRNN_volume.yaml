@@ -6,7 +6,7 @@ data:
   dataset_dir: ../data/PEMS_traffic_volume
   test_batch_size: 64
   val_batch_size: 64
-  graph_pkl_filename: ../data/PEMS_traffic_volume/adj_mat_volume_141.pkl
+  graph_pkl_filename: ../data/PEMS_traffic_volume/adj_mat_volume.pkl
 
 model:
   cl_decay_steps: 2000
@@ -15,7 +15,7 @@ model:
   input_dim: 1
   l1_decay: 0
   max_diffusion_step: 1 # 2
-  num_nodes: 141
+  num_nodes: 150
   num_rnn_layers: 2 # 2
   output_dim: 1
   rnn_units: 128

@@ -1,5 +1,5 @@
 ---
-base_dir: data/model
+base_dir: results
 log_level: INFO
 data:
   batch_size: 32
@@ -12,7 +12,7 @@ model:
   horizon: 12
   input_dim: 1
   l1_decay: 0 # not using
-  num_nodes: 141
+  num_nodes: 150
   num_rnn_layers: 1 # 2 # number of hidden layers in RNN
   output_dim: 1
   rnn_units: 128 # hidden unit dimension
@@ -34,5 +34,5 @@ train:
   patience: 50
   steps: [20] # , 30, 40, 50
   test_every_n_epochs: 1
-  preds_file: "GCNN_volume_141.csv"
-  groundtruth_file: "y_truth_GCNN_volume_141.csv" 
+  preds_file: "GCNN_volume_150.csv"
+  groundtruth_file: "y_truth_GCNN_volume_150.csv" 

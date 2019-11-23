@@ -1,5 +1,5 @@
 ---
-base_dir: data/model
+base_dir: results
 log_level: INFO
 data:
   batch_size: 32

@@ -47,8 +47,10 @@ We download a real-world network-wide hourly traffic volume dataset from [the Pe
 
 We find that GCNN-DDGF can be trained much faster than DCRNN at a single GTX 1080 Ti machine. The training configuration files can be found [here](https://github.com/transpaper/GCNN/tree/master/GCNN-DDGF_speed_volume/data/model).
 
-<img src="results/training_time_comparison.png" width="500" height="500" />
-
+<p float="left">
+<img src="results/training_time_comparison.png" width="275" height="275" />
+<img src="results/training_time_per_epoch_comparison.png" width="275" height="275" />
+</p>
 ### Citation
 You are more than welcome to cite our paper:
 ```

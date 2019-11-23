@@ -51,6 +51,7 @@ We find that GCNN-DDGF can be trained much faster than DCRNN at a single GTX 108
 <img src="results/training_time_comparison.png" width="275" height="275" />
 <img src="results/training_time_per_epoch_comparison.png" width="275" height="275" />
 </p>
+
 ### Citation
 You are more than welcome to cite our paper:
 ```

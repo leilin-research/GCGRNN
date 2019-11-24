@@ -18,7 +18,7 @@ model:
   num_nodes: 150
   num_rnn_layers: 2 # 2
   output_dim: 1
-  rnn_units: 128
+  rnn_units: 64
   seq_len: 12
   use_curriculum_learning: true
 

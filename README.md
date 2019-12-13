@@ -35,7 +35,9 @@ The current best performance is **3.19** (Mean Absolute Error) for a 12-step pre
 
 ### Network-wide Traffic Volume Prediction
 
-We download a real-world network-wide hourly traffic volume dataset from [the PeMS system District 7 (01/01/2018-06/30/2019)](http://pems.dot.ca.gov/). The dataset ([sensor_volume_150.csv](https://github.com/transpaper/GCNN/tree/master/data/METR-LA_traffic_volume)) includes 150 sensors, each sensor has 13,104 hourly traffic volumes. The whole dataset is split into training, validation, and testing datset according to a rate of 0.7, 0.1, and 0.2. The comparison of GCNN-DDGF and DCRNN for a 12-step prediction is also shown as below:
+We download a real-world network-wide hourly traffic volume dataset from [the PeMS system District 7 (01/01/2018-06/30/2019)](http://pems.dot.ca.gov/). The dataset ([sensor_volume_150.csv](https://github.com/transpaper/GCNN/tree/master/data/METR-LA_traffic_volume)) includes 150 sensors, each sensor has 13,104 hourly traffic volumes. The dowloading and preprocessing can be found [here](https://github.com/transpaper/GCNN/blob/master/Download_and_Process_PEMS_traffic_volume_data.ipynb).
+
+The whole dataset is split into training, validation, and testing datset according to a rate of 0.7, 0.1, and 0.2. The comparison of GCNN-DDGF and DCRNN for a 12-step prediction is also shown as below:
 
 <p float="left">
   <img src="results/mae_traffic_volume.png" width="250" height="250" />

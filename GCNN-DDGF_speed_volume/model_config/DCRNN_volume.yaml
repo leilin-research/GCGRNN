@@ -37,3 +37,5 @@ train:
   patience: 50
   steps: [20] # , 30, 40, 50
   test_every_n_epochs: 1
+  preds_file: "DCRNN_volume_150.csv"
+  groundtruth_file: "y_truth_DCRNN_volume_150.csv" 

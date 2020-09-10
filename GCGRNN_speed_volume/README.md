@@ -4,10 +4,13 @@ The model is implemented on the basis of [DCRNN](https://github.com/liyaguang/DC
 ## GCGRNN Model Training
 ```bash
 # METR-LA-Speed
-python gcgrnn_train.py --config_filename=model_config/GCNN_DDGF_la_speed.yaml
+python gcgrnn_train.py --config_filename=model_config/GCGRNN_la_speed.yaml
 
-# PEMS-Volume
-python gcgrnn_train.py --config_filename=model_config/GCNN_DDGF_volume.yaml
+# PEMS-Volume (1 hour)
+python gcgrnn_train.py --config_filename=model_config/GCGRNN_DDGF_volume.yaml
+
+# PEMS-Volume (15 mins)
+python gcgrnn_train.py --config_filename=model_config/GCGRNN_volume_15mins.yaml
 
 ```
 ## DCRNN Model Training

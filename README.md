@@ -32,9 +32,9 @@ The current best performance is **3.19** (Mean Absolute Error) for a 12-step pre
   <img src="results/LA_traffic_speed_comaprison.png" width="750" height="250" />
 </p>
 
-### Network-wide Traffic Volume Prediction (GCGRNN)
+### Network-wide hourly Traffic Volume Prediction (GCGRNN)
 
-We download a real-world network-wide hourly traffic volume dataset from [the PeMS system District 7 (01/01/2018-06/30/2019)](http://pems.dot.ca.gov/). The dataset ([sensor_volume_150.csv](https://github.com/transpaper/GCNN/tree/master/data/METR-LA_traffic_volume)) includes 150 sensors, each sensor has 13,104 hourly traffic volumes. The dowloading and preprocessing can be found [here](https://github.com/transpaper/GCNN/blob/master/Download_and_Process_PEMS_traffic_volume_data.ipynb).
+We download a real-world network-wide hourly traffic volume dataset from [the PeMS system District 7 (01/01/2018-06/30/2019)](http://pems.dot.ca.gov/). The dataset ([sensor_volume_150.csv](https://github.com/transpaper/GCGRNN/tree/master/data/METR-LA_traffic_volume)) includes 150 sensors, each sensor has 13,104 hourly traffic volumes. The dowloading and preprocessing can be found [here](https://github.com/transpaper/GCGRNN/blob/master/Download_and_Process_PEMS_traffic_volume_data.ipynb).
 
 The whole dataset is split into training, validation, and testing datset according to a rate of 0.7, 0.1, and 0.2. The comparison of GCGRNN and DCRNN for a 12-step prediction is also shown as below:
 
@@ -46,6 +46,15 @@ We also compare the spatial prediction performance of GCGRNN and DCRNN:
 
 <p float="left">
   <img src="results/sensor_comparison_merged.png" width="750" height="250" />
+</p>
+
+### Network-wide 15-minute Traffic Volume Prediction (GCGRNN)
+We download a real-world network-wide 15-minute traffic volume dataset from [the PeMS system District 7 (01/01/2019-06/30/2019)](http://pems.dot.ca.gov/). The dataset ([sensor_volume_150.csv](https://github.com/transpaper/GCGRNN/tree/master/data/METR-LA_traffic_volume)) includes 150 sensors, each sensor has 17,376 15-minute traffic volumes. 
+
+The whole dataset is split into training, validation, and testing datset according to a rate of 0.7, 0.1, and 0.2. The comparison of GCGRNN and DCRNN for a 12-step prediction is also shown as below:
+
+<p float="left">
+  <img src="results/temporal_v2.png" width="750" height="250" />
 </p>
 
 ### Training Time Comparison

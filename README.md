@@ -48,7 +48,7 @@ The whole dataset is split into training, validation, and testing datset accordi
 
 ### Training Time Comparison
 
-We find that GCNN-DDGF can be trained much faster than DCRNN at a single GTX 1080 Ti machine. The training configuration files can be found [here](https://github.com/transpaper/GCNN/tree/master/GCNN-DDGF_speed_volume/model_config).
+We find that GCNN-DDGF can be trained much faster than DCRNN at a single GTX 1080 Ti machine. The training configuration files can be found [here](https://github.com/transpaper/GCNN/tree/master/GCGRNN_speed_volume/model_config).
 
 <p float="left">
 <img src="results/training_time_comparison.png" width="275" height="275" />

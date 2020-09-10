@@ -29,9 +29,7 @@ The current best performance is **3.19** (Mean Absolute Error) for a 12-step pre
 
 
 <p float="left">
-  <img src="results/mae_traffic_speed.png" width="250" height="250" />
-  <img src="results/mape_traffic_speed.png" width="250" height="250" /> 
-  <img src="results/rmse_traffic_speed.png" width="250" height="250" />
+  <img src="results/LA_traffic_speed_comaprison.png" width="750" height="250" />
 </p>
 
 ### Network-wide Traffic Volume Prediction (GCGRNN)

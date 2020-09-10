@@ -1,4 +1,5 @@
-## Graph Convolutional Neural Networks with Data-driven Graph Filter (GCNN-DDGF)
+## Graph Convolutional Gated Recurrent Neural Network (GCGRNN)
+### Improved from Graph Convolutional Neural Networks with Data-driven Graph Filter (GCNN-DDGF)
 
 This repository includes the GCNN-DDGF work for the following challenges:
 

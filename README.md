@@ -1,13 +1,13 @@
 ## Graph Convolutional Gated Recurrent Neural Network (GCGRNN)
 ### Improved from Graph Convolutional Neural Networks with Data-driven Graph Filter (GCNN-DDGF)
 
-This repository includes the GCNN-DDGF work for the following challenges:
+This repository includes GCGRNN and GCNN-DDGF work for the following challenges:
 
 * Network-wide Station-level Bike-Sharing Demand Prediction
 * Network-wide Traffic Speed Prediction
 * Network-wide Traffic Volume Prediction
 
-### Bike-Sharing Demand Prediction 
+### Bike-Sharing Demand Prediction (GCNN-DDGF)
 
 The Bike-sharing demand dataset includes over 28 million bike-sharing transactions between 07/01/2013 and 06/30/2016, which are downloaded from [Citi BSS in New York City](https://www.citibikenyc.com/system-data). The data is processed as follows: 
 
@@ -19,7 +19,7 @@ The Bike-sharing demand dataset includes over 28 million bike-sharing transactio
 
 After preprocessing, 272 stations are considered in this study. The 272 by 26304 matrix is saved as [NYCBikeHourly272.pickle](https://github.com/transpaper/GCNN/tree/master/data/NYC_Citi_bike). The Lat/Lon coordinates of 272 stations are saved in [citi_bike_station_locations.csv](https://github.com/transpaper/GCNN/tree/master/data/NYC_Citi_bike).
 
-### Network-wide Traffic Speed Prediction
+### Network-wide Traffic Speed Prediction (GCGRNN)
 
 We are using the traffic speed data from Los Angeles ([metr-la.h5](https://github.com/transpaper/GCNN/tree/master/data/METR-LA_traffic_speed)) provided in the following paper:
 
@@ -34,7 +34,7 @@ The current best performance is **3.19** (Mean Absolute Error) for a 12-step pre
   <img src="results/rmse_traffic_speed.png" width="250" height="250" />
 </p>
 
-### Network-wide Traffic Volume Prediction
+### Network-wide Traffic Volume Prediction (GCGRNN)
 
 We download a real-world network-wide hourly traffic volume dataset from [the PeMS system District 7 (01/01/2018-06/30/2019)](http://pems.dot.ca.gov/). The dataset ([sensor_volume_150.csv](https://github.com/transpaper/GCNN/tree/master/data/METR-LA_traffic_volume)) includes 150 sensors, each sensor has 13,104 hourly traffic volumes. The dowloading and preprocessing can be found [here](https://github.com/transpaper/GCNN/blob/master/Download_and_Process_PEMS_traffic_volume_data.ipynb).
 
